@@ -1,0 +1,18 @@
+## important git commands
+git status 
+git branch 
+
+## 1. simple way to push the data to the main branch 
+git add .
+git commit -m "add expressjs, save and get all reviews"
+git push origin main  
+
+
+## (advanced git flow) 
+git checkout -b test/branch-and-pr-git-flow
+git add .
+git commit -m "test/branch-and-pr-git-flow"
+git push origin test/branch-and-pr-git-flow 
+CREATE PR 
+PR is approved 
+MERGE PR to main branch
