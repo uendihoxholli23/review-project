@@ -8,7 +8,7 @@ git commit -m "add expressjs, save and get all reviews"
 git push origin main  
 
 
-## (advanced git flow) 
+## (advanced git flow for future purposes) 
 git checkout -b test/branch-and-pr-git-flow
 git add .
 git commit -m "test/branch-and-pr-git-flow"
