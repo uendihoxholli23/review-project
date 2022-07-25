@@ -47,3 +47,12 @@ For example you want to query an API but only want to get data from page 10.
             console.log(req.query.page) 
           })    // http://localhost:3000/animals?page=10
 
+
+
+REcommendations:
+Always try and catch async/await and print or return the errors 
+Always validate the data comming from the client (in this case using yup)
+
+TODO (26th July):
+Try and catch for all the routes 
+Add Yup validation for all the routes 

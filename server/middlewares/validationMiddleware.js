@@ -1,4 +1,4 @@
-const validation = (schema) => async(req, res, next) => {
+const validationMiddleware = (schema) => async(req, res, next) => {
     const body = req.body
 
     try {
@@ -10,5 +10,4 @@ const validation = (schema) => async(req, res, next) => {
     }
 }
 
-
-module.exports = validation
+export default validationMiddleware

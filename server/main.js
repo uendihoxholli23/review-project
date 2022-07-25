@@ -1,14 +1,14 @@
 import { PrismaClient } from '@prisma/client'; // ORM to communicate with the database
 import express from 'express'; // server side framework
+import validationMiddleware from './middlewares/validationMiddleware.js';
+import userValidation from './validations/userValidation.js';
+
 
 // start database (only 1 instance)
 const prisma = new PrismaClient()
 
 const app = express()
 const port = 3000
-
-const validation = require('./middlewares/validationMiddleware')
-const userSchema = require('./validations/userValidation')
 
 app.use(express.json())
 
@@ -19,7 +19,7 @@ app.get('/', async(req, res) => {
     res.json(users)
 })
 
-app.post('/', validation(userSchema), async(req, res) => {
+app.post('/', validationMiddleware(userValidation), async(req, res) => {
     // get the data from postman using the req object
     const data = req.body
 
@@ -30,15 +30,50 @@ app.post('/', validation(userSchema), async(req, res) => {
     res.json(resp)
 })
 
-// app.put('/', async(req, res) => {
-//     const data = req.body
-//     const resp = await prisma.user.updateMany({ data })
+app.put('/:id', async(req, res) => {
+    const data = req.body
+    try {
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: Number(req.params.id),
+            },
+            data: data
+        })
+        return res.json({
+            message: 'User updated successfully!',
+            data: updatedUser
+        });
+    } catch (error) {
+        return res.json({
+            message: error.meta.cause,
+            error
+        });
+    }
 
-//     res.json(resp)
-// })
+})
 
-app.delete('/deleted/:id', async(req, res) => {
-    return res.json({ body: req.body, id: req.params.id });
+app.delete('/:id', async(req, res) => {
+    const userId = req.params.id
+
+    // learn try and catch with async await
+    try {
+        const deletedUser = await prisma.user.delete({
+            where: {
+                id: Number(req.params.id), // all the params are String so in this case id is a number and we cast it 
+            },
+        })
+        return res.json({
+            message: 'User deleted successfully!',
+            data: deletedUser
+        });
+    } catch (error) {
+        return res.json({
+            message: error.meta.cause,
+            error
+        });
+    }
+
+
 })
 
 
