@@ -1,6 +1,9 @@
 ## important git commands
 git status 
 git branch 
+git diff
+git fetch 
+git pull 
 
 ## 1. simple way to push the data to the main branch 
 git add .
