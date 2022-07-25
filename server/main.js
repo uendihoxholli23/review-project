@@ -1,5 +1,8 @@
-import { PrismaClient } from '@prisma/client' // ORM to communicate with the database
-import express from 'express' // server side framework
+import { PrismaClient } from '@prisma/client'; // ORM to communicate with the database
+import express from 'express'; // server side framework
+import validationMiddleware from './middlewares/validationMiddleware.js';
+import userValidation from './validations/userValidation.js';
+
 
 // start database (only 1 instance)
 const prisma = new PrismaClient()
@@ -7,13 +10,7 @@ const prisma = new PrismaClient()
 const app = express()
 const port = 3000
 
-// midlewares (are executed in between request <-> response)
-// such as midddlware to check user permissions or middleware to log the data in the console
-
-// we are using JSON as a data format to return the data to the client (client can be POSTMAN, browser, REACT, VueJS)
-// alternatives to JSON can be XML, GRAPHQL
 app.use(express.json())
-
 
 // routes (such as /reviews, /users, /users/1234)
 // methods (such as GET, POST, DELETE, PATCH)
@@ -22,16 +19,7 @@ app.get('/', async(req, res) => {
     res.json(users)
 })
 
-// async-await is used to managed the asynchronious behaviour of javascript, 
-// other alternatives are promises and callbacks
-
-// a process is synchronious when the it is executed directly such as for loops, printing in console log
-// a process is async when the result can come at any point in the future such as saving a file, reading a file
-// saving some data in the database using prisma
-
-// an async process has a lot of benefits because it doesnt stop the execution of the program and meanwhile you 
-// can do other things
-app.post('/', async(req, res) => {
+app.post('/', validationMiddleware(userValidation), async(req, res) => {
     // get the data from postman using the req object
     const data = req.body
 
@@ -41,6 +29,53 @@ app.post('/', async(req, res) => {
     // return the data that comes from prisma after adding it to postman 
     res.json(resp)
 })
+
+app.put('/:id', async(req, res) => {
+    const data = req.body
+    try {
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: Number(req.params.id),
+            },
+            data: data
+        })
+        return res.json({
+            message: 'User updated successfully!',
+            data: updatedUser
+        });
+    } catch (error) {
+        return res.json({
+            message: error.meta.cause,
+            error
+        });
+    }
+
+})
+
+app.delete('/:id', async(req, res) => {
+    const userId = req.params.id
+
+    // learn try and catch with async await
+    try {
+        const deletedUser = await prisma.user.delete({
+            where: {
+                id: Number(req.params.id), // all the params are String so in this case id is a number and we cast it 
+            },
+        })
+        return res.json({
+            message: 'User deleted successfully!',
+            data: deletedUser
+        });
+    } catch (error) {
+        return res.json({
+            message: error.meta.cause,
+            error
+        });
+    }
+
+
+})
+
 
 // start server
 app.listen(port, () => {
