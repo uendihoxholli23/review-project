@@ -41,7 +41,7 @@ You prefix the parameter name with a colon(:) when writing your routes.
             console.log(req.params.number)
         })      // http://localhost:3000/giraffe/1
 
-3. ---- req.qquery -> is mostly used for searching,sorting, filtering etc.
+3. ---- req.query -> is mostly used for searching,sorting, filtering etc.
 For example you want to query an API but only want to get data from page 10.
 
         Example: 
@@ -58,4 +58,4 @@ Always validate the data comming from the client (in this case using yup)
 
 TODO (26th July):
 Try and catch for all the routes 
-Add Yup validation for all the routes 
+Add Yup validation for all the routes (doesnt have to be middleware, we can run it separately in the route)

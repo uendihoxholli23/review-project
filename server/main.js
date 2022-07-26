@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client'; // ORM to communicate with the database
 import express from 'express'; // server side framework
-import validationMiddleware from './middlewares/validationMiddleware.js';
-import userValidation from './validations/userValidation.js';
+import userValidation, { idValidationSchema } from './validations/userValidation.js';
 
 
 // start database (only 1 instance)
@@ -19,15 +18,24 @@ app.get('/', async(req, res) => {
     res.json(users)
 })
 
-app.post('/', validationMiddleware(userValidation), async(req, res) => {
+app.post('/', async(req, res) => {
     // get the data from postman using the req object
     const data = req.body
-
-    // add the data to the database using prisma
-    const resp = await prisma.user.create({ data })
-
-    // return the data that comes from prisma after adding it to postman 
-    res.json(resp)
+    try {
+        // add the data to the database using prisma
+        const createdUser = await prisma.user.create({
+            data
+        })
+        return res.json({
+            message: 'User created successfully',
+            data: createdUser
+        });
+    } catch (error) {
+        return res.json({
+            message: error.meta.cause,
+            error
+        })
+    }
 })
 
 app.put('/:id', async(req, res) => {
@@ -53,13 +61,18 @@ app.put('/:id', async(req, res) => {
 })
 
 app.delete('/:id', async(req, res) => {
-    const userId = req.params.id
+    const userId = Number(req.params.id)
 
+    try {
+        await idValidationSchema.validate(userId)
+    } catch (error) {
+        return res.json({ error })
+    }
     // learn try and catch with async await
     try {
         const deletedUser = await prisma.user.delete({
             where: {
-                id: Number(req.params.id), // all the params are String so in this case id is a number and we cast it 
+                id: userId, // all the params are String so in this case id is a number and we cast it 
             },
         })
         return res.json({
@@ -72,10 +85,7 @@ app.delete('/:id', async(req, res) => {
             error
         });
     }
-
-
 })
-
 
 // start server
 app.listen(port, () => {

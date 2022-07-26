@@ -5,4 +5,6 @@ const userValidation = yup.object({
     comment: yup.string().min(5).max(50).required()
 })
 
+export const idValidationSchema = yup.number().required()
+
 export default userValidation
