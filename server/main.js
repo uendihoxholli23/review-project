@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'; // ORM to communicate with the database
 import express from 'express'; // server side framework
-import userValidation, { idValidationSchema } from './validations/userValidation.js';
+import userValidation, { idValidationSchema, validationSchema } from './validations/userValidation.js';
 
 
 // start database (only 1 instance)
@@ -12,19 +12,25 @@ const port = 3000
 app.use(express.json())
 
 // routes (such as /reviews, /users, /users/1234)
-// methods (such as GET, POST, DELETE, PATCH)
+// methods (such as GET, POST, DELETE, PUT)
 app.get('/', async(req, res) => {
     const users = await prisma.user.findMany()
     res.json(users)
 })
 
 app.post('/', async(req, res) => {
-    // get the data from postman using the req object
     const data = req.body
+
+    try {
+        await userValidation.validate(data)
+    } catch (error) {
+        return res.json({ error })
+    }
+
     try {
         // add the data to the database using prisma
         const createdUser = await prisma.user.create({
-            data
+            data: data
         })
         return res.json({
             message: 'User created successfully',
@@ -40,6 +46,7 @@ app.post('/', async(req, res) => {
 
 app.put('/:id', async(req, res) => {
     const data = req.body
+
     try {
         const updatedUser = await prisma.user.update({
             where: {
