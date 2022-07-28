@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'; // ORM to communicate with the database
 import express from 'express'; // server side framework
-import userValidation, { idValidationSchema, validationSchema } from './validations/userValidation.js';
+import userValidation, { idValidationSchema } from './validations/userValidation.js';
 
 
 // start database (only 1 instance)

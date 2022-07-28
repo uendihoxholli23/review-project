@@ -1,0 +1,3 @@
+https://headlessui.com/ - react(with ViteJs as bundler)
+https://tailwindcss.com/ - (tailwind css based react components)
+https://vitejs.dev/ - yarn create vite client --template react
