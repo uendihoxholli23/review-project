@@ -16,7 +16,7 @@ const StarRating = () =>{
             </label>
             );
         })}
-    {/*<h6>from {rating} reviews</h6>*/}
+    <h6 style={{fontSize: '20px'}}>{rating} stars</h6>
     </div>
     )
 }
