@@ -57,7 +57,7 @@ Always try and catch async/await and print or return the errors
 Always validate the data comming from the client (in this case using yup)
 
 -----------------------------------------
-
+How to fetch data from an API
 
 
 
