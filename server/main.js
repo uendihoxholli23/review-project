@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'; // ORM to communicate with the database
 import express from 'express'; // server side framework
 import userValidation, { idValidationSchema } from './validations/userValidation.js';
-
+import cors from 'cors'
 
 // start database (only 1 instance)
 const prisma = new PrismaClient()
@@ -9,7 +9,9 @@ const prisma = new PrismaClient()
 const app = express()
 const port = 3000
 
+// middlewares
 app.use(express.json())
+app.use(cors())
 
 // routes (such as /reviews, /users, /users/1234)
 // methods (such as GET, POST, DELETE, PUT)

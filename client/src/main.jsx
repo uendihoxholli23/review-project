@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
+import Reviews from './Reviews'
 import './index.css'
+import IntoReact from './IntoReact'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <IntoReact />
+    <Reviews />
   </React.StrictMode>
 )

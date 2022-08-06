@@ -8,8 +8,6 @@ const dishes = [
     "/images/food3.jpg",
 ];
 
-
-
 let count = 0;
 let slideInterval;
 
@@ -61,21 +59,18 @@ export default function Slider(){
             </div>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
                 <div className='card' style={{width: 200, padding:'10px', textAlign: 'center'}}>
-                    <b><input className='title' type="text" placeholder='Title'/></b>
                     <textarea name="comment" id="comment" placeholder='Comment...'></textarea>
                     <input className='name' type="text" placeholder='User name...'/>
                     <input type="date" />
                     <img src={dishes[currentIndex]} alt="" width={200} style={{padding: '10px'}}/>
                 </div>
                 <div className='card' style={{width: 200, padding:'10px', textAlign: 'center'}}>
-                    <b><input className='title' type="text" placeholder='Title'/></b>
                     <textarea name="comment" id="comment" placeholder='Comment...'></textarea>
                     <input className='name' type="text" placeholder='User name...'/>
                     <input type="date" />
                     <img src={dishes[currentIndex]} alt="" width={200} style={{padding: '10px'}}/>
                 </div>
                 <div className='card' style={{width: 200, padding:'10px', textAlign: 'center'}}>
-                    <b><input className='title' type="text" placeholder='Title'/></b>
                     <textarea name="comment" id="comment" placeholder='Comment...'></textarea>
                     <input className='name' type="text" placeholder='User name...'/>
                     <input type="date" />
