@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Reviews from './Reviews'
 import './index.css'
-import IntoReact from './IntoReact'
+import IntroReact from './IntroReact'
+import AddReview from './AddReview'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <IntoReact />
+    <IntroReact />
     <Reviews />
+    <AddReview />
   </React.StrictMode>
 )
