@@ -6,17 +6,20 @@ async function getReviews() {
   return result;
 }
 
-const deleteReview = (id) => {
-  axios.delete(`http://localhost:3000/${id}`)
-  .then((res) => {
-    console.log('Deleted!', res)
-  }).catch((err) => {
-    console.log(err)
-  })
-}
-
 function Reviews() {
   const [reviews, setReviews] = useState();
+
+  const deleteReview = (id) => {
+    console.log(id);
+    axios.delete(`http://localhost:3000/${id}`)
+    .then((res) => {
+      console.log('Deleted!', res);
+      const filteredReviews = reviews.filter((review) => review.id !== id);
+      setReviews(filteredReviews);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 
   useEffect(() => {
     getReviews().then(resp => {
@@ -25,6 +28,8 @@ function Reviews() {
     });
   }, []);
 
+
+
   return (
     <ul>
       {reviews?.map((review) => (
@@ -32,7 +37,7 @@ function Reviews() {
           <h3><b>Username:</b>{review.username}</h3>
           <h3><b>Surname:</b> {review.surname}</h3>
           <h6><b>Comment:</b> {review.comment}</h6>
-          <button style={{padding: '5px'}} className="deleteButton" onClick={() => window.location.reload(review.id)}>Delete Review</button>
+          <button style={{padding: '5px'}} className="deleteButton" onClick={() => deleteReview(review.id)}>Delete Review</button>
           <hr />
         </li>
       ))}

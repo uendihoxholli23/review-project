@@ -6,7 +6,7 @@ export class Form extends React.Component {
     this.state = {
       username: "",
       surname: "",
-      comment: ""
+      comment: "",
     };
   }
 
@@ -38,18 +38,19 @@ export class Form extends React.Component {
           value={comment}
           onChange={this.handleChange}
         />
-        <button type="submit" >Add Review</button>
+        <button type="submit">Add Review</button>
+        {/* <button type="submit">Edit Review</button> */}
       </form>
     );
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     console.log("Adding Review");
     console.log(this.state);
   };

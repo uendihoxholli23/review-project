@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
+const addReview = (values) => {
+  const { username, surname, comment } = values;
+  axios
+    .post("http://localhost:3000/", { username, surname, comment })
+    .then((res) => {
+      console.log("Posted!", res);
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-const addReview = () => {
-  axios.post("http://localhost:3000/")
-  .then((res) => {
-    console.log('Posted!', res)
-  }).catch((err) => {
-    console.log(err)
-  })
-}
+const editReview = () => {
+  axios
+    .put("http://localhost:3000/")
+    .then((res) => {
+      console.log("Edited!", res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-const AddReview = () => (
+const AddEditReview = () => (
   <Formik
     initialValues={{ username: "", surname: "", comment: "" }}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log(values);
-        setSubmitting(false);
-      }, 500);
-    }}
+    onSubmit={addReview}
     validationSchema={Yup.object().shape({
       username: Yup.string().required("Required"),
       surname: Yup.string().required("Required"),
-      comment: Yup.string().required("Required")
+      comment: Yup.string().required("Required"),
     })}
   >
     {(props) => {
@@ -40,7 +49,7 @@ const AddReview = () => (
       } = props;
       return (
         <form onSubmit={handleSubmit}>
-          <label htmlFor="usernmae">Username: </label>
+          <label htmlFor="username">Username: </label>
           <input
             name="username"
             type="text"
@@ -81,13 +90,16 @@ const AddReview = () => (
           {errors.comment && touched.comment && (
             <div className="input-feedback">{errors.comment}</div>
           )}
-          <button type="submit" disabled={isSubmitting}  onClick={addReview}>
+          <button type="submit" disabled={isSubmitting}>
             Add Review
           </button>
+          {/* { <button type="button" disabled={isSubmitting} onClick={editReview}>
+            Edit Review
+          </button> } */}
         </form>
       );
     }}
   </Formik>
 );
 
-export default AddReview;
+export default AddEditReview;
