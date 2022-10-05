@@ -76,7 +76,7 @@ form {
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 20px;
 }
 
 label,
@@ -88,6 +88,7 @@ input {
 label {
   margin-bottom: 5px;
   height: 22px;
+  color: white;
 }
 
 input {
@@ -110,12 +111,12 @@ input.error {
 
 button {
   padding: 10px 15px;
-  background-color: rgb(70, 153, 179);
-  color: rgb(70, 153, 179);
-  border: 1px solid rgb(70, 153, 179);
+  background-color: rgb(20 184 166);
+  color: rgb(20 184 166);
+  border: 1px solid rgb(20 184 166);
   background-color: 250ms;
 }
 button:hover {
-  background-color: rgb(70, 153, 179);
+  background-color: rgb(20 184 166);
   color: white;
 }
