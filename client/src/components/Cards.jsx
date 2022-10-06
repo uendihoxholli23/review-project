@@ -1,4 +1,4 @@
-function Cards() {
+function Cards(props) {
   return (
     <section class="text-gray-400 bg-gray-900 body-font">
       <div class="container px-5 py-24 mx-auto">
@@ -12,7 +12,7 @@ function Cards() {
               ></img>
               <div class="p-6">
                 <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">
-                  Username and surname
+                  Username
                 </h2>
                 <h1 class="title-font text-lg font-medium text-white mb-3">
                   Title

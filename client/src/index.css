@@ -120,3 +120,7 @@ button:hover {
   background-color: rgb(20 184 166);
   color: white;
 }
+
+.text-center {
+  padding: 40px;
+}
