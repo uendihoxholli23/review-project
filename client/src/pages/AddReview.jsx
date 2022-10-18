@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Reviews from "../Reviews";
 
 function AddReview() {
   const navigate = useNavigate();
@@ -104,6 +105,7 @@ function AddReview() {
           );
         }}
       </Formik>
+      <Reviews />
     </section>
   );
 }

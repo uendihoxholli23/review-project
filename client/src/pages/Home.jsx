@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Cards from "../components/Cards";
+
 import "../index.css";
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,16 +13,16 @@ function Home() {
         return res.json();
       })
       .then((data) => {
-        const reviews = [];
+        const allReviews = [];
         for (const key in data) {
           const review = {
             id: key,
             ...data[key],
           };
-          reviews.push(review);
+          allReviews.push(review);
         }
         setIsLoading(false);
-        setLoadedData(reviews);
+        setLoadedData(allReviews);
       });
   }, []);
 
@@ -51,6 +52,6 @@ function Home() {
       </section>
     );
   }
-  return <Cards></Cards>;
+  return <Cards allReviews={loadedData}></Cards>;
 }
 export default Home;

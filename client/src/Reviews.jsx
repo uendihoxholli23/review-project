@@ -31,29 +31,32 @@ function Reviews() {
   }, []);
 
   return (
-    <ul>
-      {reviews?.map((review) => (
-        <li key={review.id}>
-          <h3>
-            <b>Username:</b>
-            {review.username}
-          </h3>
-          <h3>
-            <b>Surname:</b> {review.surname}
-          </h3>
-          <h6>
-            <b>Comment:</b> {review.comment}
-          </h6>
-          <button
-            className="deleteButton"
-            onClick={() => deleteReview(review.id)}
-          >
-            Delete Review
-          </button>
-          <hr />
-        </li>
-      ))}
-    </ul>
+    <div class="p-4 mx-16 space-y-4">
+      <div class="reviews">
+        <ul>
+          {reviews?.map((review) => (
+            <li key={review.id}>
+              <h3>
+                <b>Username:</b>
+                {review.username}
+              </h3>
+              <h3>
+                <b>Surname:</b> {review.surname}
+              </h3>
+              <h6>
+                <b>Comment:</b> {review.comment}
+              </h6>
+              <button
+                className="deleteButton"
+                onClick={() => deleteReview(review.id)}
+              >
+                Delete Review
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
