@@ -20,19 +20,8 @@ function AddReview() {
       });
   };
 
-  const editReview = () => {
-    axios
-      .put("http://localhost:3000/")
-      .then((res) => {
-        console.log("Edited!", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
-    <section class="text-gray-400 bg-gray-900 body-font h-screen">
+    <section class="text-gray-400 bg-gray-900 body-font h-screen px-5 py-24 mx-auto">
       <Formik
         initialValues={{ username: "", surname: "", comment: "" }}
         onSubmit={addReview}

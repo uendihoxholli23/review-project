@@ -1,5 +1,5 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
 function Navbar() {
   return (
     <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">

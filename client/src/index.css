@@ -64,6 +64,9 @@ input[type="date"]{
         opacity: 1;
     }
 } */
+body {
+  background-color: #111827;
+}
 .deleteButton {
   padding: 5px;
   color: white;
@@ -131,4 +134,8 @@ ul {
 }
 li {
   margin-left: 10px;
+}
+.cards {
+  display: flex;
+  justify-content: center;
 }
